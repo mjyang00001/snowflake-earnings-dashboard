@@ -57,22 +57,16 @@ st.markdown("""
         border-radius: 12px;
     }
 
-    /* Metric Labels - Dark Navy */
-    div[data-testid="stMetric"] label {
+    /* ALL Metric Text - Force Dark Navy (Override white text) */
+    div[data-testid="stMetric"] * {
         color: #051839 !important;
-        font-weight: 600 !important;
     }
 
-    /* Bold Metric Values */
+    /* Bold Metric Values - Bright Blue */
     div[data-testid="stMetricValue"] > div {
         color: #005793 !important;
         font-size: 2.2rem !important;
         font-weight: 800 !important;
-    }
-
-    /* Metric Delta */
-    div[data-testid="stMetric"] [data-testid="stMetricDelta"] {
-        color: #051839 !important;
     }
 
     /* Professional Q&A Cards (High Contrast for Dark Mode) */

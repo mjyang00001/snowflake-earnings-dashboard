@@ -36,6 +36,18 @@ st.markdown("""
     [data-testid="stSidebar"] label {
         color: #051839 !important;
     }
+
+    /* Expander Headers - Fix Text Overlap */
+    .streamlit-expanderHeader {
+        font-size: 1.1em !important;
+        font-weight: 600 !important;
+        color: #ffffff !important;
+    }
+
+    /* Remove or minimize arrow icon overlap */
+    details summary {
+        padding-left: 30px !important;
+    }
     
     /* Executive Metric Cards */
     div[data-testid="stMetric"] {
@@ -44,12 +56,23 @@ st.markdown("""
         padding: 25px !important;
         border-radius: 12px;
     }
-    
+
+    /* Metric Labels - Dark Navy */
+    div[data-testid="stMetric"] label {
+        color: #051839 !important;
+        font-weight: 600 !important;
+    }
+
     /* Bold Metric Values */
     div[data-testid="stMetricValue"] > div {
         color: #005793 !important;
         font-size: 2.2rem !important;
         font-weight: 800 !important;
+    }
+
+    /* Metric Delta */
+    div[data-testid="stMetric"] [data-testid="stMetricDelta"] {
+        color: #051839 !important;
     }
 
     /* Professional Q&A Cards (High Contrast for Dark Mode) */

@@ -92,11 +92,14 @@ st.markdown("""
 
     /* Metric Delta - Default Green */
     div[data-testid="stMetric"] [data-testid="stMetricDelta"] {
-        color: #006400 !important;
+        color: #ffffff !important;
+        background-color: #1e4620 !important;
+        border-radius: 6px !important;
+        padding: 4px 8px !important;
     }
 
     div[data-testid="stMetric"] [data-testid="stMetricDelta"] svg {
-        fill: #006400 !important;
+        fill: #ffffff !important;
     }
 
     /* Metric Delta - Red for negative (down arrow) - Using nth-of-type for NRR column */

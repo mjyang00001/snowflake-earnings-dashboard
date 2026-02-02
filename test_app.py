@@ -5,15 +5,12 @@ import plotly.graph_objects as go
 import json
 import os
 
-# --- 1. ELEGANT PAGE CONFIG ---
 st.set_page_config(
     page_title="SNOW Intelligence | Q3 War Room", 
     page_icon="❄️",
     layout="wide"
 )
 
-# --- 2. HIGH-CONTRAST BRANDED STYLING ---
-# Using official Snowflake colors: Deep Navy (#051839) and Winter Blue (#005793)
 st.markdown("""
     <style>
     /* Base Typography and Background */
@@ -141,10 +138,9 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- 3. DATA PERSISTENCE ---
+
 @st.cache_data
 def get_dashboard_data():
-    # Attempt to load results from your notebook's JSON output
     if os.path.exists("qa_results.json"):
         with open("qa_results.json", "r") as f:
             return json.load(f)
@@ -152,7 +148,6 @@ def get_dashboard_data():
 
 results = get_dashboard_data()
 
-# --- 4. SIDEBAR NAVIGATION ---
 with st.sidebar:
     st.image("https://www.snowflake.com/wp-content/uploads/2023/11/snowflake-logo-blue.png", width=180)
     st.markdown("### **Executive Briefing**")
@@ -160,7 +155,7 @@ with st.sidebar:
     st.divider()
     st.caption("Intelligence Source: FY2026 Q3 10-Q & Peer Transcripts")
 
-# --- 5. PERSISTENT EXECUTIVE TICKER ---
+
 st.markdown("<h1 style='font-weight:800; margin-bottom:0; color:#29B5E8 !important;'>Quarterly Strategic Overview</h1>", unsafe_allow_html=True)
 st.markdown("<p style='font-size:1.1em; color:#A0C4D9 !important;'>FY2026 Q3 Performance and Risk Assessment</p>", unsafe_allow_html=True)
 
@@ -171,7 +166,7 @@ m3.metric("RPO", "$6,900M", "+21.1% YoY")
 m4.metric("Customers >$1M", "688", "+26.9% YoY")
 st.divider()
 
-# --- 6. INTELLIGENCE PILLARS ---
+
 
 if nav == "Executive Brief":
     st.markdown("### **AI-Powered Earnings Call Preparation**")
@@ -179,7 +174,7 @@ if nav == "Executive Brief":
 
     st.divider()
 
-    # Show top predicted questions at a glance
+    
     if results and len(results['qa_pairs']) > 0:
         st.markdown("### **Top Predicted Analyst Questions**")
         st.markdown("*These are the questions analysts are most likely to ask during the Q&A:*")
@@ -194,7 +189,7 @@ if nav == "Executive Brief":
 
         st.divider()
 
-        # Key talking points
+        
         st.markdown("### **Key Talking Points for CFO**")
         col1, col2 = st.columns(2)
         with col1:
@@ -221,7 +216,7 @@ elif nav == "Briefing Overview":
 elif nav == "Competitive Intelligence":
     st.markdown("### **Competitive Positioning: Growth vs. Margins**")
 
-    # Robust Visual: Comparative Bar Chart
+    
     fig = go.Figure()
     fig.add_trace(go.Bar(name='Snowflake', x=['Rev Growth %', 'Gross Margin %'], y=[29, 76], marker_color='#005793'))
     fig.add_trace(go.Bar(name='Datadog', x=['Rev Growth %', 'Gross Margin %'], y=[26, 81], marker_color='#051839'))
@@ -258,7 +253,7 @@ elif nav == "Competitive Intelligence":
 elif nav == "Retention Risk (NRR)":
     st.markdown("### **Deep Dive: The NRR Glide Path**")
     
-    # Robust Visual: High-Contrast Trend Line
+    
     nrr_hist = pd.DataFrame({
         "Quarter": ["Q4'24", "Q1'25", "Q2'25", "Q3'25", "Q3'26"],
         "NRR": [131, 128, 127, 127, 125]
@@ -275,10 +270,10 @@ elif nav == "Retention Risk (NRR)":
     """)
 
 elif nav == "Q&A Readiness":
-    st.markdown("### **🎯 Analyst Q&A Preparation: The Hot Seat**")
+    st.markdown("### **Analyst Q&A Preparation: The Hot Seat**")
     st.markdown("#### *Predicted 'Hard' Questions & Data-Backed Defenses*")
 
-    # Use a loop to render your generated pairs if they exist
+    
     if results:
         for i, pair in enumerate(results['qa_pairs']):
             st.markdown(f"""

@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Data files (keep only what's needed for dashboard)
+SNOW Intelligence Dataset Extractions/
+SNOW Intelligence PDF Docs/
+*.pdf
+*.csv
+
+# Keep these files for deployment:
+# - test_app.py
+# - qa_results.json
+# - requirements.txt

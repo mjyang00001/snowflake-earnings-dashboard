@@ -42,16 +42,27 @@ st.markdown("""
         font-weight: 800 !important;
     }
 
-    /* Professional Q&A Cards (Dark Theme for the Finale) */
+    /* Professional Q&A Cards (Light Theme for Better Readability) */
     .qa-card {
-        background-color: #051839;
-        color: #ffffff !important;
+        background-color: #f8f9fb;
+        color: #051839 !important;
         padding: 35px;
         border-radius: 15px;
         margin-bottom: 25px;
+        border: 2px solid #005793;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     }
-    .qa-card p, .qa-card b, .qa-card span { color: #ffffff !important; }
+    .qa-card p, .qa-card b, .qa-card span { color: #051839 !important; }
+    .qa-card .theme-tag {
+        color: #ffffff !important;
+        background-color: #005793;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-size: 0.75em;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+    .qa-card hr { border: 1px solid #dee2e6 !important; }
     
     /* Strategic Sidebar */
     [data-testid="stSidebar"] { 
@@ -76,7 +87,7 @@ results = get_dashboard_data()
 with st.sidebar:
     st.image("https://www.snowflake.com/wp-content/uploads/2023/11/snowflake-logo-blue.png", width=180)
     st.markdown("### **Executive Briefing**")
-    nav = st.radio("Strategic Focus", ["Briefing Overview", "Competitive Benchmarking", "Retention Risk (NRR)", "Q&A Readiness"])
+    nav = st.radio("Strategic Focus", ["Executive Brief", "Briefing Overview", "Competitive Intelligence", "Retention Risk (NRR)", "Q&A Readiness"])
     st.divider()
     st.caption("Intelligence Source: FY2026 Q3 10-Q & Peer Transcripts")
 
@@ -93,7 +104,36 @@ st.divider()
 
 # --- 6. INTELLIGENCE PILLARS ---
 
-if nav == "Briefing Overview":
+if nav == "Executive Brief":
+    st.markdown("### **AI-Powered Earnings Call Preparation**")
+    st.markdown("**What This Dashboard Does:** Uses AI to predict the toughest analyst questions based on 317 historical earnings call questions, SEC filings, and equity research from 10+ sell-side firms.")
+
+    st.divider()
+
+    # Show top predicted questions at a glance
+    if results and len(results['qa_pairs']) > 0:
+        st.markdown("### **Top Predicted Analyst Questions**")
+        st.markdown("*These are the questions analysts are most likely to ask during the Q&A:*")
+
+        for i, pair in enumerate(results['qa_pairs'], 1):
+            with st.expander(f"**Question {i}: {pair['question']['theme']}**", expanded=(i==1)):
+                st.markdown(f"**Question:** {pair['question']['question']}")
+                st.markdown(f"**Recommended Response:** {pair['response']}")
+                st.caption(f"Data basis: {pair['question']['data_basis']}")
+
+        st.divider()
+
+        # Key talking points
+        st.markdown("### **Key Talking Points for CFO**")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.success("**Strength: Revenue Growth**\n\n29% YoY product revenue growth outpaces peers (Datadog 26%, MongoDB 22%). Emphasize enterprise adoption with 688 customers spending >$1M.")
+        with col2:
+            st.warning("**Risk: NRR Decline**\n\nNRR at 125% (historical low). Narrative must shift from 'normalization' to 'stabilization' - highlight that large customer cohort spending is stabilizing.")
+    else:
+        st.warning("No Q&A predictions available. Please run the earnings_war_room.ipynb notebook to generate predictions.")
+
+elif nav == "Briefing Overview":
     st.markdown("### **Quarterly Situation Report**")
     c1, c2 = st.columns([2, 1])
     with c1:
@@ -107,15 +147,15 @@ if nav == "Briefing Overview":
     with c2:
         st.info("**Key News:** The Anthropic partnership is a critical narrative lever to defend against 'Model Lock-in' fears.")
 
-elif nav == "Competitive Benchmarking":
+elif nav == "Competitive Intelligence":
     st.markdown("### **Competitive Positioning: Growth vs. Margins**")
-    
+
     # Robust Visual: Comparative Bar Chart
     fig = go.Figure()
     fig.add_trace(go.Bar(name='Snowflake', x=['Rev Growth %', 'Gross Margin %'], y=[29, 76], marker_color='#005793'))
     fig.add_trace(go.Bar(name='Datadog', x=['Rev Growth %', 'Gross Margin %'], y=[26, 81], marker_color='#051839'))
     fig.add_trace(go.Bar(name='MongoDB', x=['Rev Growth %', 'Gross Margin %'], y=[22, 77], marker_color='#c5c9d1'))
-    
+
     fig.update_layout(
         template="simple_white",
         barmode='group',
@@ -123,11 +163,26 @@ elif nav == "Competitive Benchmarking":
         legend=dict(orientation="h", y=1.1)
     )
     st.plotly_chart(fig, use_container_width=True)
-    
-    st.markdown("""
-    **CFO Insight:** We lead the group in top-line growth (29%), but **Datadog's 81% margin profile** remains the 
-    benchmark for efficiency. Analysts will probe our path to matching this operating leverage as AI workloads scale.
-    """)
+
+    st.divider()
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("""
+        **Our Position:**
+        - **Growth Leader:** 29% YoY revenue growth outpaces Datadog (26%) and MongoDB (22%)
+        - **Strong RPO:** $6.9B in remaining performance obligations signals enterprise commitment
+        - **Customer Expansion:** 688 customers spending >$1M annually (+27% YoY)
+        """)
+    with col2:
+        st.markdown("""
+        **Key Competitive Threats:**
+        - **Databricks:** Competing on lakehouse architecture and Iceberg support
+        - **Microsoft Fabric:** Bundling advantage with Azure ecosystem
+        - **Margin Gap:** Datadog's 81% gross margin vs our 76% - analysts will probe efficiency
+        """)
+
+    st.info("**CFO Talking Point:** We're winning on growth while investing in AI capabilities. As Cortex workloads scale, margins will naturally expand toward peer benchmarks.")
 
 elif nav == "Retention Risk (NRR)":
     st.markdown("### **Deep Dive: The NRR Glide Path**")
@@ -157,11 +212,11 @@ elif nav == "Q&A Readiness":
         for i, pair in enumerate(results['qa_pairs']):
             st.markdown(f"""
             <div class="qa-card">
-                <b style="color: #4da3ff; font-size: 0.85em; text-transform: uppercase;">ANALYST THEME: {pair['question']['theme']}</b>
-                <p style="font-size: 1.25em; margin-top: 10px; font-weight:600;">"{pair['question']['question']}"</p>
-                <hr style="border: 0.5px solid #ffffff33; margin: 20px 0;">
-                <p><b>Executive Defense:</b> {pair['response']}</p>
-                <span style="font-size: 0.8em; color: #a5b1c2;">Data Basis: {pair['question']['data_basis']}</span>
+                <span class="theme-tag">ANALYST THEME: {pair['question']['theme']}</span>
+                <p style="font-size: 1.25em; margin-top: 15px; font-weight:600;">"{pair['question']['question']}"</p>
+                <hr style="margin: 20px 0;">
+                <p><b>Executive Response:</b> {pair['response']}</p>
+                <span style="font-size: 0.85em; color: #6c757d;">Data Basis: {pair['question']['data_basis']}</span>
             </div>
             """, unsafe_allow_html=True)
     else:

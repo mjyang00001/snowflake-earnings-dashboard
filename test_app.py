@@ -71,8 +71,8 @@ st.markdown("""
         border-radius: 12px;
     }
 
-    /* Metric Labels - Dark Navy */
-    div[data-testid="stMetric"] label {
+    /* ALL Metric Text - Force Dark Navy (except deltas) */
+    div[data-testid="stMetric"] *:not([data-testid="stMetricDelta"]):not([data-testid="stMetricDelta"] *) {
         color: #051839 !important;
     }
 
@@ -92,17 +92,12 @@ st.markdown("""
         fill: #28a745 !important;
     }
 
-    /* Metric Delta - Red for negative (down arrow) */
-    div[data-testid="stMetric"] [data-testid="stMetricDelta"].stMetricDelta--negative,
-    div[data-testid="stMetric"] div[data-testid="stMetricDelta"] > div:first-child[style*="rotate(180deg)"] ~ div {
+    /* Metric Delta - Red for negative (down arrow) - Using nth-of-type for NRR column */
+    div[data-testid="stHorizontalBlock"] > div:nth-of-type(2) [data-testid="stMetricDelta"] {
         color: #dc3545 !important;
     }
 
-    div[data-testid="stMetric"] [data-testid="stMetricDelta"] > div:first-child[style*="rotate(180deg)"] {
-        fill: #dc3545 !important;
-    }
-
-    div[data-testid="stMetric"] [data-testid="stMetricDelta"] > div:first-child[style*="rotate(180deg)"] svg {
+    div[data-testid="stHorizontalBlock"] > div:nth-of-type(2) [data-testid="stMetricDelta"] svg {
         fill: #dc3545 !important;
     }
 

@@ -73,7 +73,7 @@ st.markdown("""
 
     /* NRR Delta Badge - Red Background (2nd column) */
     div[data-testid="stHorizontalBlock"] > div:nth-of-type(2) [data-testid="stMetricDelta"] {
-        background-color: #ffe5e5 !important;
+        background-color: #8B0000 !important;
         border-radius: 6px !important;
         padding: 4px 8px !important;
     }
@@ -92,11 +92,11 @@ st.markdown("""
 
     /* Metric Delta - Default Green */
     div[data-testid="stMetric"] [data-testid="stMetricDelta"] {
-        color: #28a745 !important;
+        color: #006400 !important;
     }
 
     div[data-testid="stMetric"] [data-testid="stMetricDelta"] svg {
-        fill: #28a745 !important;
+        fill: #006400 !important;
     }
 
     /* Metric Delta - Red for negative (down arrow) - Using nth-of-type for NRR column */

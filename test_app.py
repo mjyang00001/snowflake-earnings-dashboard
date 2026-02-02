@@ -71,10 +71,11 @@ st.markdown("""
         border-radius: 12px;
     }
 
-    /* NRR Metric Card - Red Background (2nd column) */
-    div[data-testid="stHorizontalBlock"] > div:nth-of-type(2) div[data-testid="stMetric"] {
+    /* NRR Delta Badge - Red Background (2nd column) */
+    div[data-testid="stHorizontalBlock"] > div:nth-of-type(2) [data-testid="stMetricDelta"] {
         background-color: #ffe5e5 !important;
-        border: 2px solid #dc3545 !important;
+        border-radius: 6px !important;
+        padding: 4px 8px !important;
     }
 
     /* ALL Metric Text - Force Dark Navy (except deltas) */

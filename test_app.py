@@ -157,10 +157,12 @@ if nav == "Executive Brief":
         st.markdown("*These are the questions analysts are most likely to ask during the Q&A:*")
 
         for i, pair in enumerate(results['qa_pairs'], 1):
-            with st.expander(f"**Question {i}: {pair['question']['theme']}**", expanded=(i==1)):
-                st.markdown(f"**Question:** {pair['question']['question']}")
-                st.markdown(f"**Recommended Response:** {pair['response']}")
-                st.caption(f"Data basis: {pair['question']['data_basis']}")
+            st.markdown(f"#### Question {i}: {pair['question']['theme']}")
+            st.markdown(f"**Question:** {pair['question']['question']}")
+            st.markdown(f"**Recommended Response:** {pair['response']}")
+            st.caption(f"Data basis: {pair['question']['data_basis']}")
+            if i < len(results['qa_pairs']):
+                st.divider()
 
         st.divider()
 

@@ -44,9 +44,23 @@ st.markdown("""
         color: #ffffff !important;
     }
 
-    /* Remove or minimize arrow icon overlap */
+    /* Hide the arrow icon completely */
+    details summary::before,
+    details summary::marker,
+    summary::-webkit-details-marker {
+        display: none !important;
+    }
+
+    /* Remove padding since no arrow */
     details summary {
-        padding-left: 30px !important;
+        padding-left: 0 !important;
+        list-style: none !important;
+    }
+
+    /* Hide any ::before pseudo-elements that might contain arrow text */
+    .streamlit-expanderHeader::before {
+        content: none !important;
+        display: none !important;
     }
     
     /* Executive Metric Cards */

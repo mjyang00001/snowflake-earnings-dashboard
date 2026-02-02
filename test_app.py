@@ -21,15 +21,20 @@ st.markdown("""
     
     .main { background-color: #ffffff !important; }
     
-    /* High-Contrast Text */
-    h2, h3, label {
-        color: #051839 !important;
+    /* Light Text for Dark Mode Compatibility */
+    h1, h2, h3, p, span, label {
+        color: #ffffff !important;
         font-family: 'Inter', sans-serif !important;
     }
 
-    /* Headers - allow custom colors */
-    h1, p, span {
-        font-family: 'Inter', sans-serif !important;
+    /* Sidebar - keep readable on light background */
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] label {
+        color: #051839 !important;
     }
     
     /* Executive Metric Cards */
@@ -47,27 +52,27 @@ st.markdown("""
         font-weight: 800 !important;
     }
 
-    /* Professional Q&A Cards (Light Theme for Better Readability) */
+    /* Professional Q&A Cards (High Contrast for Dark Mode) */
     .qa-card {
-        background-color: #f8f9fb;
-        color: #051839 !important;
+        background-color: #1a1a1a;
+        color: #ffffff !important;
         padding: 35px;
         border-radius: 15px;
         margin-bottom: 25px;
-        border: 2px solid #005793;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        border: 2px solid #29B5E8;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
     }
-    .qa-card p, .qa-card b, .qa-card span { color: #051839 !important; }
+    .qa-card p, .qa-card b, .qa-card span { color: #ffffff !important; }
     .qa-card .theme-tag {
-        color: #ffffff !important;
-        background-color: #005793;
+        color: #000000 !important;
+        background-color: #29B5E8;
         padding: 4px 12px;
         border-radius: 4px;
         font-size: 0.75em;
         text-transform: uppercase;
         font-weight: 700;
     }
-    .qa-card hr { border: 1px solid #dee2e6 !important; }
+    .qa-card hr { border: 1px solid #444444 !important; }
     
     /* Strategic Sidebar */
     [data-testid="stSidebar"] { 

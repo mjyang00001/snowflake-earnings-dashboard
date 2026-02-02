@@ -22,8 +22,13 @@ st.markdown("""
     .main { background-color: #ffffff !important; }
     
     /* High-Contrast Text */
-    h1, h2, h3, p, span, label { 
-        color: #051839 !important; 
+    h2, h3, label {
+        color: #051839 !important;
+        font-family: 'Inter', sans-serif !important;
+    }
+
+    /* Headers - allow custom colors */
+    h1, p, span {
         font-family: 'Inter', sans-serif !important;
     }
     
@@ -92,8 +97,8 @@ with st.sidebar:
     st.caption("Intelligence Source: FY2026 Q3 10-Q & Peer Transcripts")
 
 # --- 5. PERSISTENT EXECUTIVE TICKER ---
-st.markdown("<h1 style='font-weight:800; margin-bottom:0; color:#005793 !important;'>Quarterly Strategic Overview</h1>", unsafe_allow_html=True)
-st.markdown("<p style='font-size:1.1em; color:#7c98b3 !important;'>FY2026 Q3 Performance and Risk Assessment</p>", unsafe_allow_html=True)
+st.markdown("<h1 style='font-weight:800; margin-bottom:0; color:#29B5E8 !important;'>Quarterly Strategic Overview</h1>", unsafe_allow_html=True)
+st.markdown("<p style='font-size:1.1em; color:#A0C4D9 !important;'>FY2026 Q3 Performance and Risk Assessment</p>", unsafe_allow_html=True)
 
 m1, m2, m3, m4 = st.columns(4)
 m1.metric("Product Revenue", "$1,160M", "+28.8% YoY")

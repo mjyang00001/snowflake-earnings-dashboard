@@ -71,8 +71,8 @@ st.markdown("""
         border-radius: 12px;
     }
 
-    /* ALL Metric Text - Force Dark Navy (Override white text) */
-    div[data-testid="stMetric"] * {
+    /* Metric Labels - Dark Navy */
+    div[data-testid="stMetric"] label {
         color: #051839 !important;
     }
 
@@ -83,17 +83,26 @@ st.markdown("""
         font-weight: 800 !important;
     }
 
-    /* Metric Delta - Green for positive, Red for inverse (negative) */
+    /* Metric Delta - Default Green */
+    div[data-testid="stMetric"] [data-testid="stMetricDelta"] {
+        color: #28a745 !important;
+    }
+
     div[data-testid="stMetric"] [data-testid="stMetricDelta"] svg {
         fill: #28a745 !important;
     }
 
-    /* Red delta for inverse/negative changes */
-    div[data-testid="stMetric"] [data-testid="stMetricDelta"]:has(svg[style*="transform: rotate(180deg)"]) {
+    /* Metric Delta - Red for negative (down arrow) */
+    div[data-testid="stMetric"] [data-testid="stMetricDelta"].stMetricDelta--negative,
+    div[data-testid="stMetric"] div[data-testid="stMetricDelta"] > div:first-child[style*="rotate(180deg)"] ~ div {
         color: #dc3545 !important;
     }
 
-    div[data-testid="stMetric"] [data-testid="stMetricDelta"]:has(svg[style*="transform: rotate(180deg)"]) svg {
+    div[data-testid="stMetric"] [data-testid="stMetricDelta"] > div:first-child[style*="rotate(180deg)"] {
+        fill: #dc3545 !important;
+    }
+
+    div[data-testid="stMetric"] [data-testid="stMetricDelta"] > div:first-child[style*="rotate(180deg)"] svg {
         fill: #dc3545 !important;
     }
 

@@ -15,12 +15,13 @@ st.markdown("""
     <style>
     /* Base Typography and Background */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-    
-    .main { background-color: #ffffff !important; }
-    
-    /* Light Text for Dark Mode Compatibility */
-    h1, h2, h3, p, span, label {
-        color: #ffffff !important;
+
+    .main { background-color: #0a1929 !important; }
+
+    /* Main Content - Light text on dark background */
+    .main h1, .main h2, .main h3, .main p, .main span, .main label,
+    .main div, .main li, .main em, .main strong {
+        color: #e3f2fd !important;
         font-family: 'Inter', sans-serif !important;
     }
 
@@ -156,19 +157,19 @@ with st.sidebar:
     st.caption("Intelligence Source: FY2026 Q3 10-Q & Peer Transcripts")
 
 
-st.markdown("<h1 style='font-weight:800; margin-bottom:0; color:#29B5E8 !important;'>Quarterly Strategic Overview</h1>", unsafe_allow_html=True)
-st.markdown("<p style='font-size:1.1em; color:#A0C4D9 !important;'>FY2026 Q3 Performance and Risk Assessment</p>", unsafe_allow_html=True)
-
-m1, m2, m3, m4 = st.columns(4)
-m1.metric("Product Revenue", "$1,160M", "+28.8% YoY")
-m2.metric("NRR", "125%", "-200 bps", delta_color="inverse")
-m3.metric("RPO", "$6,900M", "+21.1% YoY")
-m4.metric("Customers >$1M", "688", "+26.9% YoY")
-st.divider()
-
-
+# --- 6. INTELLIGENCE PILLARS ---
 
 if nav == "Executive Brief":
+    st.markdown("<h1 style='font-weight:800; margin-bottom:0; color:#29B5E8 !important;'>Quarterly Strategic Overview</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size:1.1em; color:#A0C4D9 !important;'>FY2026 Q3 Performance and Risk Assessment</p>", unsafe_allow_html=True)
+
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("Product Revenue", "$1,160M", "+28.8% YoY")
+    m2.metric("Net Revenue Retention", "125%", "-200 bps", delta_color="inverse")
+    m3.metric("Remaining Perf. Obligations", "$6,900M", "+21.1% YoY")
+    m4.metric("Customers >$1M", "688", "+26.9% YoY")
+    st.divider()
+
     st.markdown("### **AI-Powered Earnings Call Preparation**")
     st.markdown("**What This Dashboard Does:** Uses AI to predict the toughest analyst questions based on 317 historical earnings call questions, SEC filings, and equity research from 10+ sell-side firms.")
 
@@ -176,20 +177,22 @@ if nav == "Executive Brief":
 
     
     if results and len(results['qa_pairs']) > 0:
-        st.markdown("### **Top Predicted Analyst Questions**")
-        st.markdown("*These are the questions analysts are most likely to ask during the Q&A:*")
+        st.markdown("### **Top 3 Predicted Analyst Questions**")
+        st.markdown("*High-level overview of the toughest questions analysts are likely to ask:*")
+        st.markdown("")
 
         for i, pair in enumerate(results['qa_pairs'], 1):
-            st.markdown(f"#### Question {i}: {pair['question']['theme']}")
-            st.markdown(f"**Question:** {pair['question']['question']}")
-            st.markdown(f"**Recommended Response:** {pair['response']}")
-            st.caption(f"Data basis: {pair['question']['data_basis']}")
-            if i < len(results['qa_pairs']):
-                st.divider()
+            # Extract first sentence or first 100 chars of question as preview
+            question_text = pair['question']['question']
+            preview = question_text.split('?')[0] + '?' if '?' in question_text else question_text[:100] + '...'
+            st.markdown(f"**{i}. {pair['question']['theme']}**")
+            st.markdown(f"   *{preview}*")
+            st.markdown("")
+
+        st.info("→ **Full Q&A preparation with detailed responses available in 'Q&A Readiness' tab**")
 
         st.divider()
 
-        
         st.markdown("### **Key Talking Points for CFO**")
         col1, col2 = st.columns(2)
         with col1:

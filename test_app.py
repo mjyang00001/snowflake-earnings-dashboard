@@ -286,6 +286,6 @@ elif nav == "Q&A Readiness":
                 st.markdown("**Executive Response:**")
                 st.markdown(pair['response'])
                 st.markdown("")
-                st.caption(f"📊 Data basis: {pair['question']['data_basis']}")
+                st.caption(f"Data basis: {pair['question']['data_basis']}")
     else:
         st.warning("Please run the 'Earnings War Room' notebook to generate the latest Q&A results.")

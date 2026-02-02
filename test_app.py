@@ -83,6 +83,20 @@ st.markdown("""
         font-weight: 800 !important;
     }
 
+    /* Metric Delta - Green for positive, Red for inverse (negative) */
+    div[data-testid="stMetric"] [data-testid="stMetricDelta"] svg {
+        fill: #28a745 !important;
+    }
+
+    /* Red delta for inverse/negative changes */
+    div[data-testid="stMetric"] [data-testid="stMetricDelta"]:has(svg[style*="transform: rotate(180deg)"]) {
+        color: #dc3545 !important;
+    }
+
+    div[data-testid="stMetric"] [data-testid="stMetricDelta"]:has(svg[style*="transform: rotate(180deg)"]) svg {
+        fill: #dc3545 !important;
+    }
+
     /* Professional Q&A Cards (High Contrast for Dark Mode) */
     .qa-card {
         background-color: #1a1a1a;

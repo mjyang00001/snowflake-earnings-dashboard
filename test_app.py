@@ -170,15 +170,15 @@ if nav == "Executive Brief":
     m4.metric("Customers >$1M", "688", "+26.9% YoY")
     st.divider()
 
-    st.markdown("### **AI-Powered Earnings Call Preparation**")
-    st.markdown("**What This Dashboard Does:** Uses AI to predict the toughest analyst questions based on 317 historical earnings call questions, SEC filings, and equity research from 10+ sell-side firms.")
+    st.markdown("### **AI Powered Earnings Call Preparation**")
+    st.markdown("**What This Dashboard Does:** Uses AI to predict the toughest analyst questions based on 317 historical earnings call questions, SEC filings, and equity research from 10+ sell side firms.")
 
     st.divider()
 
     
     if results and len(results['qa_pairs']) > 0:
         st.markdown("### **Top 3 Predicted Analyst Questions**")
-        st.markdown("*High-level overview of the toughest questions analysts are likely to ask:*")
+        st.markdown("*High level overview of the toughest questions analysts are likely to ask:*")
         st.markdown("")
 
         for i, pair in enumerate(results['qa_pairs'], 1):
@@ -211,13 +211,13 @@ elif nav == "Briefing Overview":
         outpaces many legacy peers, analysts are seeking proof that **Cortex AI** adoption will offset structural NRR 
         declines. 
         
-        **Strategic Moat:** Our $6.9B RPO remains the strongest indicator of long-term enterprise commitment.
+        **Strategic Moat:** Our $6.9B RPO remains the strongest indicator of long term enterprise commitment.
         """)
     with c2:
-        st.info("**Key News:** The Anthropic partnership is a critical narrative lever to defend against 'Model Lock-in' fears.")
+        st.info("**Key News:** The Anthropic partnership is a critical narrative lever to defend against 'Model Lock in' fears.")
 
 elif nav == "Competitive Intelligence":
-    st.markdown("### **Competitive Positioning: Growth vs. Margins**")
+    st.markdown("### **We Lead on Growth (29%), Trail on Margins vs. Datadog**")
 
     
     fig = go.Figure()
@@ -254,7 +254,7 @@ elif nav == "Competitive Intelligence":
     st.info("**CFO Talking Point:** We're winning on growth while investing in AI capabilities. As Cortex workloads scale, margins will naturally expand toward peer benchmarks.")
 
 elif nav == "Retention Risk (NRR)":
-    st.markdown("### **Deep Dive: The NRR Glide Path**")
+    st.markdown("### **NRR at Historic Low: 13 Consecutive Quarters of Decline**")
     
     
     nrr_hist = pd.DataFrame({
@@ -274,19 +274,18 @@ elif nav == "Retention Risk (NRR)":
 
 elif nav == "Q&A Readiness":
     st.markdown("### **Analyst Q&A Preparation: The Hot Seat**")
-    st.markdown("#### *Predicted 'Hard' Questions & Data-Backed Defenses*")
+    st.markdown("#### *Predicted 'Hard' Questions & Data Backed Defenses*")
+    st.markdown("")
 
-    
     if results:
-        for i, pair in enumerate(results['qa_pairs']):
-            st.markdown(f"""
-            <div class="qa-card">
-                <span class="theme-tag">ANALYST THEME: {pair['question']['theme']}</span>
-                <p style="font-size: 1.25em; margin-top: 15px; font-weight:600;">"{pair['question']['question']}"</p>
-                <hr style="margin: 20px 0;">
-                <p><b>Executive Response:</b> {pair['response']}</p>
-                <span style="font-size: 0.85em; color: #6c757d;">Data Basis: {pair['question']['data_basis']}</span>
-            </div>
-            """, unsafe_allow_html=True)
+        for i, pair in enumerate(results['qa_pairs'], 1):
+            with st.expander(f"**Question {i}: {pair['question']['theme']}**", expanded=False):
+                st.markdown("**Analyst Question:**")
+                st.markdown(f"*\"{pair['question']['question']}\"*")
+                st.markdown("")
+                st.markdown("**Executive Response:**")
+                st.markdown(pair['response'])
+                st.markdown("")
+                st.caption(f"📊 Data basis: {pair['question']['data_basis']}")
     else:
         st.warning("Please run the 'Earnings War Room' notebook to generate the latest Q&A results.")
